@@ -1,34 +1,92 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+#region ---- FRAMEWORK ----
+// Fonction préparé mais non exécuté
+void AffichageCredits() // Corps de méthode, non exécuté tant que pas utilisé
+{
+    Console.WriteLine("Thomas & co");
+    Console.WriteLine("2023");
+}
+
+void AfficherChoixForces()
+{
+    Console.WriteLine("De quel côté de la force es-tu ?");
+    Console.WriteLine("1. Du côté lumineux");
+    Console.WriteLine("2. Du côté obscure");
+    Console.WriteLine("3. Je ne suis pas un Jedi");
+}
+
+int AfficherForcesEtRetourneSelection()
+{
+    AfficherChoixForces();
+    string saisieForce = Console.ReadLine();
+    return int.Parse(saisieForce);
+}
+
+int[,] PrepareGrilleDuJeu()
+{
+    int[] positions = new int[10];
+
+    // APPROCHE MATRICIELLE
+    int[,] grilleDeJeu = new int[20, 20];
+    const int AUCUN_PERSO = -1;
+
+    for (int i = 0; i < grilleDeJeu.GetLength(0); i++) // dimension 0 = ligne 0
+    {
+        for (int j = 0; j < grilleDeJeu.GetLength(1); j++)
+        {
+            grilleDeJeu[i, j] = AUCUN_PERSO;
+        }
+    }
+    return grilleDeJeu;
+}
+
+void AfficherItemMenu(string itemMenu, int indexMenu)
+{
+    string format = "{0}. {1}";
+    string resultatFormatage = string.Format(format, indexMenu, itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower());
+    Console.WriteLine(resultatFormatage);
+}
+
+#endregion
+
 #region // ---- HARRY POTTER ECRAN TITRE ----
 string titre = "Harry Potter Game";
 string sousTitre = "un jeu épique !";
 Console.WriteLine(titre + ", " + sousTitre);
 #endregion
 
-#region ---- AFFICHAGE MENU ----
-string format = "{0}. {1}";
+#region ---- INITALISATION MOTEUR DE JEU ----
+int[,] grilleDeJeu = PrepareGrilleDuJeu();
+#endregion
 
+#region ---- AFFICHAGE MENU ----
 // Formatage en une étape
-string itemMenu = "nouvelle partie";
-Console.WriteLine(format, 1, itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower());
+//string itemMenu = "nouvelle partie";
+//Console.WriteLine(format, 1, itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower());
 
 // Formatage en 2 étapes
 //string itemMenu = "nouvelle partie";
 //string resultatFormatage = string.Format(format, 1, itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower());
 //Console.WriteLine(resultatFormatage);
 
-itemMenu = "charger une partie";
-string resultatFormatage = $"{2}. {itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower()}";
-Console.WriteLine(resultatFormatage);
+//itemMenu = "charger une partie";
+//string resultatFormatage = $"{2}. {itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower()}";
+//Console.WriteLine(resultatFormatage);
 
-itemMenu = "crédits";
-resultatFormatage = string.Format(format, 3, itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower());
-Console.WriteLine(resultatFormatage);
+//itemMenu = "crédits";
+//resultatFormatage = string.Format(format, 3, itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower());
+//Console.WriteLine(resultatFormatage);
 
-itemMenu = "quitter";
-resultatFormatage = string.Format(format, 4, itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower());
-Console.WriteLine(resultatFormatage);
+//itemMenu = "quitter";
+//resultatFormatage = string.Format(format, 4, itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower());
+//Console.WriteLine(resultatFormatage);
+
+
+AfficherItemMenu("nouvelle partie", 1);
+AfficherItemMenu("charger une partie", 2);
+AfficherItemMenu("crédits", 3);
+AfficherItemMenu("quitter", 4);
 
 // Première étape avant formatage
 //string itemMenu = "nouvelle partie";
@@ -188,17 +246,6 @@ for (int i = 0; i < 4; i++)
 #endregion
 
 #region ---- CHOIX COTE FORCE ---- 
-int AfficherForcesEtRetourneSelection()
-{
-    Console.WriteLine("De quel côté de la force es-tu ?");
-    Console.WriteLine("1. Du côté lumineux");
-    Console.WriteLine("2. Du côté obscure");
-    Console.WriteLine("3. Je ne suis pas un jedi");
-
-    string saisieForce = Console.ReadLine();
-    return int.Parse(saisieForce);
-}
-
 int typeForce = AfficherForcesEtRetourneSelection(); 
 
 const int forceLumineuse = 1;
@@ -230,27 +277,7 @@ switch (typeForce)
 
 #endregion
 
-#region ---- INITALISATION MOTEUR DE JEU ----
-// APPROCHE MATRICIELLE
-int[,] grilleDeJeu = new int[20,20];
-const int AUCUN_PERSO = -1;
-
-for (int i = 0; i < grilleDeJeu.GetLength(0); i++) // dimension 0 = ligne 0
-{
-    for (int j = 0; j <  grilleDeJeu.GetLength(1); j++)
-    {
-        grilleDeJeu[i, j] = AUCUN_PERSO;
-    }
-}
-#endregion
 
 #region ---- AFFICHAGE CREDIT ----
 AffichageCredits(); // Execution ! 
-
-void AffichageCredits() // Corps de méthode, non exécuté tant que pas utilisé
-{
-    Console.WriteLine("Thomas & co");
-    Console.WriteLine("2023");
-}
-
 #endregion<
