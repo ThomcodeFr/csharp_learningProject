@@ -42,11 +42,7 @@ Console.WriteLine(resultatFormatage);
 //Console.WriteLine(4 + "." + itemMenu.Substring(0, 1).ToUpper() + itemMenu.Substring(1).ToLower());
 #endregion
 
-
 #region PARTIE SAISIE INFORMATIONS JOUEUR / JOUEUSE
-// ---- PARTIE SAISIE INFORMATIONS JOUEUR / JOUEUSE ------------
-
-#region Commentaires
 //int j = 0;
 //while (j < 2)
 //{
@@ -62,7 +58,6 @@ Console.WriteLine(resultatFormatage);
 
 //    j++;
 //} while (j < 2);
-#endregion
 
 bool estAgeValid = false;
 int agePlayer = 0;
@@ -156,7 +151,6 @@ if (estAgeValid)
 Console.WriteLine(agePlayer);
 #endregion
 
-
 #region ---- DATE DE NAISSANCE ---- 
 /*
 Console.WriteLine("Quelle est ta date de naissance ?");
@@ -169,8 +163,6 @@ DateOnly dateNaissance = DateOnly.FromDateTime(dateEtHeureNaissance);
 Console.WriteLine("Tu as saisie " + dateNaissance);
 */
 #endregion
-
-
 
 #region ---- PREPARATION ARME ---- 
 // decimal puissanceArme = 10;
@@ -195,31 +187,37 @@ for (int i = 0; i < 4; i++)
 
 #endregion
 
-
 #region ---- CHOIX COTE FORCE ---- 
+int AfficherForcesEtRetourneSelection()
+{
+    Console.WriteLine("De quel côté de la force es-tu ?");
+    Console.WriteLine("1. Du côté lumineux");
+    Console.WriteLine("2. Du côté obscure");
+    Console.WriteLine("3. Je ne suis pas un jedi");
 
-Console.WriteLine("De quel côté de la force es-tu ?");
+    string saisieForce = Console.ReadLine();
+    return int.Parse(saisieForce);
+}
 
-Console.WriteLine("1. Du côté lumineux");
-Console.WriteLine("2. Du côté obscure");
-Console.WriteLine("3. Je ne suis pas un jedi");
+int typeForce = AfficherForcesEtRetourneSelection(); 
 
-string saisieForce = Console.ReadLine();
+const int forceLumineuse = 1;
+const int forceObscure = 2;
+const int sansForce = 3;
 
-int typeForce = int.Parse(saisieForce);
 
 switch (typeForce)
 {
-    case 1:
+    case forceLumineuse:
         {
             Console.WriteLine("Tu as choisi le côté lumineux");
         } break;
-    case 2:
+    case forceObscure:
         {
             Console.WriteLine("Tu as choisi le côté obscur");
         }
         break;
-    case 3:
+    case sansForce:
         {
             Console.WriteLine("Tu n'as pas de choix de force");
         }
@@ -231,3 +229,28 @@ switch (typeForce)
 }
 
 #endregion
+
+#region ---- INITALISATION MOTEUR DE JEU ----
+// APPROCHE MATRICIELLE
+int[,] grilleDeJeu = new int[20,20];
+const int AUCUN_PERSO = -1;
+
+for (int i = 0; i < grilleDeJeu.GetLength(0); i++) // dimension 0 = ligne 0
+{
+    for (int j = 0; j <  grilleDeJeu.GetLength(1); j++)
+    {
+        grilleDeJeu[i, j] = AUCUN_PERSO;
+    }
+}
+#endregion
+
+#region ---- AFFICHAGE CREDIT ----
+AffichageCredits(); // Execution ! 
+
+void AffichageCredits() // Corps de méthode, non exécuté tant que pas utilisé
+{
+    Console.WriteLine("Thomas & co");
+    Console.WriteLine("2023");
+}
+
+#endregion<
